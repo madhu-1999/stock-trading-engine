@@ -6,11 +6,20 @@ public class Order {
         SELL
     }
 
+    // Stores if order is BUY or SELL
     private OrderType orderType;
+    // Ticker of order ranging from TICK0 to TICK1023
     private String ticker;
+    /*
+    This is the quantity which will be decremented whenever order is partially or fully fulfilled.
+    AtomicInteger is used to ensure only one thread updates quantity at a time.
+    */   
     private AtomicInteger quantity;
+    // Order price will randomly vary between $9.8 and $102
     private double price;
     private long timestamp;
+    //Quantity the order was added in with. Maintained for tracking how much of the order has been fulfilled.
+    // Varies from 100 to 1000 
     private int originalQuantity;
 
     public Order(OrderType orderType, String ticker, int quantity, double price, long timestamp) {
